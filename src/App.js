@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 function App() {
+  const [input, setinput] = useState('');
+
+  const [message, setmessage] = useState(['hello']);
+
+
+  const changeinput=(e)=>{
+    setinput(e.target.value);
+  }
+
+  const sendmessage=(e)=>{
+    e.preventDefault();
+    setmessage([...message,input]);
+    setinput('');
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello i am hardik here</h1>
+      <form action="/#">
+        <input type="text" value={input} onChange={changeinput} />
+        <Button variant='contained' disabled={!input} onClick={sendmessage}>Submit</Button>
+      </form>
+
+      {
+        message.map((m)=>{
+          return <p>{m}</p>
+        })
+      }
     </div>
   );
 }
