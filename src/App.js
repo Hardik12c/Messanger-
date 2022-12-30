@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
-import Button from '@mui/material/Button';
+import { Button,FormControl,Input,InputLabel} from '@mui/material'
+import Messages from './components/Messages';
 
 function App() {
   const [input, setinput] = useState('');
@@ -17,17 +18,18 @@ function App() {
     setmessage([...message,input]);
     setinput('');
   }
+  console.log(message);
   return (
     <div className="App">
       <h1>Hello i am hardik here</h1>
-      <form action="/#">
-        <input type="text" value={input} onChange={changeinput} />
+      <FormControl>
+        <InputLabel>Enter text Here</InputLabel>
+        <Input type="text" value={input} onChange={changeinput}/>
         <Button variant='contained' disabled={!input} onClick={sendmessage}>Submit</Button>
-      </form>
-
+      </FormControl>
       {
         message.map((m)=>{
-          return <p>{m}</p>
+          return <Messages text={m}/>
         })
       }
     </div>
