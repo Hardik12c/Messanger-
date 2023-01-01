@@ -2,6 +2,7 @@ import "./App.css";
 import { useState,useEffect } from "react";
 import { Button, FormControl, Input, InputLabel } from "@mui/material";
 import Messages from "./components/Messages";
+import db from "./db/firebase";
 
 function App() {
   const [input, setinput] = useState("");
@@ -12,6 +13,12 @@ function App() {
   ]);
   const [username, setusername] = useState('');
 
+  useEffect(() => {
+    db.collection('Messages').onSnapshot(snapshot=>{
+      setmessage(snapshot.docs.map(doc=> doc.data()))
+    })
+  }, [])
+  
   useEffect(() => {
     setusername(prompt('Please Enter your name'));
   },[])
