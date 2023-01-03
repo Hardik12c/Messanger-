@@ -13,3 +13,15 @@
   bottom: 0;
   margin: 20px;
 }
+
+.app__formcontrol{
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.app__input{
+  flex:0.98;
+}
+.app__icon{
+  flex:0;
+}

@@ -1,7 +1,7 @@
 import "./App.css";
 import logo from "./assets/logo.svg"
 import { useState,useEffect } from "react";
-import {FormControl, Input, InputLabel } from "@mui/material";
+import {FormControl, Input } from "@mui/material";
 import Messages from "./components/Messages";
 import db from "./db/firebase";
 import firebase from 'firebase/compat/app';
@@ -31,7 +31,10 @@ function App() {
   }, [])
   
   useEffect(() => {
-    setusername(prompt('Please Enter your name'));
+    let nameofuser=(prompt('Please Enter your name'));
+    if(!nameofuser){
+      setusername('Unknown User')
+    }else setusername(nameofuser)
   },[])
   
 
@@ -40,15 +43,15 @@ function App() {
   };
 
   return (
+    <>
     <div className="App">
       <img className="logo" src={logo} alt="" />
       <h1>Welocome to I-chat</h1>
       <h2>Hello {username}</h2>
       <form className="app__form">
-        <FormControl>
-          <InputLabel>Enter text Here</InputLabel>
-          <Input type="text" value={input} onChange={changeinput} />
-          <IconButton color="primary" variant="contained" disabled={!input}  onClick={sendmessage}>
+        <FormControl className="app__formcontrol">
+          <Input className="app__input" placeholder="Enter a Message..." type="text" value={input} onChange={changeinput} />
+          <IconButton className="app__icon" color="primary" variant="contained" disabled={!input}  onClick={sendmessage}>
             <SendIcon />
           </IconButton>
         </FormControl>
@@ -60,6 +63,7 @@ function App() {
         ))}
       </FlipMove>
     </div>
+    </>
   );
 }
 
